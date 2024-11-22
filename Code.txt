@@ -10,17 +10,25 @@ loop	SUB	two
 
 # if negative (odd number)
 	LDA	input
-	OUT
-	HLT
+	ADD	input
+	ADD	input
+	ADD	one
+	STO	input	
+	BR	divide
 
 # if zero (even number)
-even	LDA	count
+even	BR	divide
+
+
+# divide by 2
+divide	LDA	count
 	ADD	one
 	STO	count
 	LDA	input
 	SUB	two
 	STO	input
 	BRP	even
+# Subtract one from count
 	LDA	count
 	SUB	one
 	OUT
@@ -31,6 +39,3 @@ input	DAT	0
 one	DAT	1
 two	DAT	2
 count	DAT	0
-
-
-
