@@ -1,0 +1,36 @@
+# input and store number
+	IN
+	STO	input
+	OUT
+
+# subtract two until either zero or negative
+loop	SUB	two
+	BRZ	even
+	BRP	loop
+
+# if negative (odd number)
+	LDA	input
+	OUT
+	HLT
+
+# if zero (even number)
+even	LDA	count
+	ADD	one
+	STO	count
+	LDA	input
+	SUB	two
+	STO	input
+	BRP	even
+	LDA	count
+	SUB	one
+	OUT
+	HLT
+
+# data initalisation
+input	DAT	0
+one	DAT	1
+two	DAT	2
+count	DAT	0
+
+
+
