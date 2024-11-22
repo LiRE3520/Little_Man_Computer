@@ -1,0 +1,13 @@
+	IN
+	STO	input
+	OUT
+loop	SUB	two
+	BRZ	even
+	BRP	loop
+	BR	odd
+even	LDA	two
+	OUT
+odd	LDA	input
+	OUT
+input	DAT	0
+two	DAT	2
