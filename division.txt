@@ -1,7 +1,0 @@
-start LDA	count
-	ADD	one
-	STO	count
-	LDA	a
-	SUB	b
-	STO	a
-	BRP	start
