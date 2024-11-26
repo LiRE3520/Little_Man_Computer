@@ -2,6 +2,8 @@
 	IN
 start	STO	input
 	OUT
+
+# check if one
 	SUB	one
 	BRZ	halt
 
@@ -16,6 +18,11 @@ loop	SUB	two
 	BRP	loop
 
 # if odd number
+	LDA	input
+# check if over 667
+	SUB	sss
+	BRP	over
+# multiply by three and add one
 	LDA	input
 	ADD	input
 	ADD	input
@@ -39,6 +46,8 @@ divide	LDA	count
 	SUB	one
 	BR	start
 
+over	LDA	zero
+	OUT
 halt	HLT
 
 # data initalisation
@@ -47,3 +56,4 @@ one	DAT	1
 two	DAT	2
 count	DAT	0
 zero	DAT	0
+sss	DAT	667
