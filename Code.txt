@@ -1,5 +1,6 @@
 # input and store number
 	IN
+	STO	f
 start	STO	input
 	OUT
 
@@ -10,8 +11,22 @@ start	STO	input
 # reset count to zero
 	LDA	zero
 	STO	count
-	LDA	input
 
+# divide by two
+divide	LDA	count
+	ADD	one
+	STO	count
+	LDA	f
+	SUB	two
+	STO	f
+	BRP	divide
+# Subtract one from count
+	LDA	count
+	SUB	one
+	STO	f
+
+# check if input is odd or even
+	LDA	input
 # subtract two until either zero or negative
 loop	SUB	two
 	BRZ	even
@@ -22,36 +37,28 @@ loop	SUB	two
 # check if over 667
 	SUB	sss
 	BRP	over
-# multiply by three and add one
-	LDA	input
-	ADD	input
-	ADD	input
-	ADD	one
-	STO	input	
-	BR	divide
-
-# if even number
-even	BR	divide
-
-# divide by 2
-divide	LDA	count
-	ADD	one
-	STO	count
-	LDA	input
-	SUB	two
-	STO	input
-	BRP	divide
-# Subtract one from count
-	LDA	count
-	SUB	one
+# multiply by three and add two
+	LDA	f
+	ADD	f
+	ADD	f
+	ADD	two
+	STO	f
 	BR	start
 
+# if even number
+even	LDA	f
+	BR	start
+
+# overflow case
 over	LDA	zero
 	OUT
+
+# overflow
 halt	HLT
 
 # data initalisation
 input	DAT	0
+f	DAT	0
 one	DAT	1
 two	DAT	2
 count	DAT	0
