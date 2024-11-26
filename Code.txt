@@ -1,14 +1,21 @@
 # input and store number
 	IN
-	STO	input
+start	STO	input
 	OUT
+	SUB	one
+	BRZ	halt
+
+# reset count to zero
+	LDA	zero
+	STO	count
+	LDA	input
 
 # subtract two until either zero or negative
 loop	SUB	two
 	BRZ	even
 	BRP	loop
 
-# if negative (odd number)
+# if odd number
 	LDA	input
 	ADD	input
 	ADD	input
@@ -16,9 +23,8 @@ loop	SUB	two
 	STO	input	
 	BR	divide
 
-# if zero (even number)
+# if even number
 even	BR	divide
-
 
 # divide by 2
 divide	LDA	count
@@ -27,15 +33,17 @@ divide	LDA	count
 	LDA	input
 	SUB	two
 	STO	input
-	BRP	even
+	BRP	divide
 # Subtract one from count
 	LDA	count
 	SUB	one
-	OUT
-	HLT
+	BR	start
+
+halt	HLT
 
 # data initalisation
 input	DAT	0
 one	DAT	1
 two	DAT	2
 count	DAT	0
+zero	DAT	0
