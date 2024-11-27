@@ -15,9 +15,10 @@ divide	LDA	count
 	LDA	input
 	SUB	two
 	STO	input
-	BRP	divide
 # check if the final result was a zero (therefore even input)
 	BRZ	even
+# loop divide if not zero
+	BRP	divide
 # if odd number
 	LDA	count
 	SUB	one
@@ -33,7 +34,6 @@ divide	LDA	count
 	BR	start
 # if even number
 even	LDA	count
-	SUB	one
 	BR	start
 # overflow case
 over	LDA	zero
