@@ -1,6 +1,6 @@
 # input and store number
 	IN
-start	STO	input
+start	STO	f
 	OUT
 # check if one
 	SUB	one
@@ -9,27 +9,27 @@ start	STO	input
 	LDA	zero
 	STO	count
 # divide by two and check even/odd
-divide	LDA	count
+subtwo	LDA	count
 	ADD	one
 	STO	count
-	LDA	input
+	LDA	f
 	SUB	two
-	STO	input
+	STO	f
 # check if the final result was a zero (therefore even input)
 	BRZ	even
-# loop divide if not zero
-	BRP	divide
+# loop if not zero
+	BRP	subtwo
 # if odd number
 	LDA	count
 	SUB	one
-	STO	input
+	STO	f
 # check if over 333 (667 total)
 	SUB	ttt
 	BRP	over
 # multiply by three and add two
-	LDA	input
-	ADD	input
-	ADD	input
+	LDA	f
+	ADD	f
+	ADD	f
 	ADD	two
 	BR	start
 # if even number
@@ -40,7 +40,7 @@ over	LDA	zero
 	OUT
 halt	HLT
 # data initalisation
-input	DAT	0
+f	DAT	0
 zero	DAT	0
 one	DAT	1
 two	DAT	2
