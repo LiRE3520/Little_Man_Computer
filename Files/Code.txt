@@ -7,7 +7,7 @@ start	STO	input
 # check if one
 	SUB	one
 	BRZ	halt
-
+	
 # reset count to zero
 	LDA	zero
 	STO	count
@@ -53,14 +53,14 @@ even	LDA	f
 over	LDA	zero
 	OUT
 
-# overflow
+# halt
 halt	HLT
 
 # data initalisation
 input	DAT	0
 f	DAT	0
+zero	DAT	0
 one	DAT	1
 two	DAT	2
-count	DAT	0
-zero	DAT	0
 sss	DAT	667
+count	DAT	0
