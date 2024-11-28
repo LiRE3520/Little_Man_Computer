@@ -21,16 +21,14 @@ subtwo	LDA	count
 	BRP	subtwo
 # if odd number
 	LDA	count
-	SUB	one
-	STO	f
-# check if over 333 (667 total)
-	SUB	ttt
+# check if over 334 (667 total)
+	SUB	ttf
 	BRP	over
 # multiply by three and add two
-	LDA	f
-	ADD	f
-	ADD	f
-	ADD	two
+	LDA	count
+	ADD	count
+	ADD	count
+	SUB	one
 	BR	start
 # if even number
 even	LDA	count
@@ -44,5 +42,5 @@ f	DAT	0
 zero	DAT	0
 one	DAT	1
 two	DAT	2
-ttt	DAT	333
+ttf	DAT	334
 count	DAT	0
