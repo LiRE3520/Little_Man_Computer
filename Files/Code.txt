@@ -1,42 +1,39 @@
-# input and store number
+# Store the input:
 	IN
-start	STO	f
+start	STO	input
 	OUT
-# reset count to zero
+# Reset count to zero:
 	LDA	zero
 	STO	count
-# divide by two and check even/odd
+# Divide the input by two AND check if the input is odd or even:
 subtwo	LDA	count
-	ADD	one
+	ADD	one			// Add one to count each loop.
 	STO	count
-	LDA	f
-	SUB	two
-	STO	f
-# check if the final result was a zero (therefore even input)
-	BRZ	even
-# loop if not zero
-	BRP	subtwo
-# if odd number
-	LDA	count
-# check if over 334 (667 total)
-	SUB	ttf
+	LDA	input
+	SUB	two			// Subtract two from the input each loop.
+	STO	input
+	BRZ	even			// If the value reaches zero while looping, the input is even. Count at this stage would be the CORRECT result of dividing the input by two.
+	BRP	subtwo			// If the number is not zero nor negative, continue the loop.
+# For odd input:					// If the number reached a negative value and was never zero, the input is odd.
+	LDA	count			// Count at this stage is the result of dividing the input by two, rounded UP. I will call this (input/2)+1
+# Check for overflow case:
+	SUB	ttf			// If count is greater than or equal to 334, the input must be greater than or equal to 667, which, when the input is odd, is an overflow case.
 	BRP	over
-# sub one from count
-	LDA	count
-	SUB	one
-# check if one
-	BRZ	halt
-# multiply by three and add two
-	ADD	count
-# if even add count to zero and loop
-even	ADD	count
-	BR	start
-# overflow case
+# Load (x/2) in the calculator:
+	LDA	count			// Count at this stage is still (input/2)+1
+	SUB	one			// This brings the calculator value to (input/2)
+# Check for base case:
+	BRZ	halt			// If (input/2) is zero, then the input must be one, which is the base case. Therefore, the program ends here.
+# Multiply by three and add two:					// (3x+1)/2 is equivalent to 3(x/2)+2 - assuming x/2 is rounded down.
+	ADD	count			// Count is still (input/2)+1. Therefore, adding count twice will add 2(input/2)+2, bringing the current value to 3(input/2)+2.
+even	ADD	count			// If the input is even, count at this stage is (input/2) and the value in the calculator is zero.
+	BR	start			// The function restarts, with the next f value in the calculator, ready to be stored as the new input.
+# Overflow case:
 over	LDA	zero
 	OUT
 halt	HLT
-# data initalisation
-f	DAT	0
+# Data initalisation:
+input	DAT	0
 zero	DAT	0
 one	DAT	1
 two	DAT	2
