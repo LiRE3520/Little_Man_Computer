@@ -18,15 +18,14 @@ subtwo	LDA	count
 	BRP	subtwo
 # if odd number
 	LDA	count
-# check if over 334 (667 total)
-	SUB	ttf
-	BRP	over
-# sub one from count
-	LDA	count
 	SUB	one
 # check if one
 	BRZ	halt
+# check if over 333 (667 total)
+	SUB	ttt
+	BRP	over
 # multiply by three and add two
+	LDA	count
 	ADD	count
 # if even add count to zero and loop
 even	ADD	count
@@ -40,5 +39,5 @@ f	DAT	0
 zero	DAT	0
 one	DAT	1
 two	DAT	2
-ttf	DAT	334
+ttt	DAT	333
 count	DAT	0
