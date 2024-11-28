@@ -26,12 +26,9 @@ subtwo	LDA	count
 	BRP	over
 # multiply by three and add two
 	LDA	count
-	ADD	count
-	ADD	count
 	SUB	one
-	BR	start
-# if even number
-even	LDA	count
+	ADD	count
+even	ADD	count
 	BR	start
 # overflow case
 over	LDA	zero
