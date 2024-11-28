@@ -2,9 +2,6 @@
 	IN
 start	STO	f
 	OUT
-# check if one
-	SUB	one
-	BRZ	halt
 # reset count to zero
 	LDA	zero
 	STO	count
@@ -24,10 +21,14 @@ subtwo	LDA	count
 # check if over 334 (667 total)
 	SUB	ttf
 	BRP	over
-# multiply by three and add two
+# sub one from count
 	LDA	count
 	SUB	one
+# check if one
+	BRZ	halt
+# multiply by three and add two
 	ADD	count
+# if even add count to zero and loop
 even	ADD	count
 	BR	start
 # overflow case
