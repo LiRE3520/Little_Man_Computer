@@ -19,7 +19,7 @@ subtwo	LDA	count
 # Check for overflow case:
 	SUB	ttf			// If count is greater than or equal to 334, the input must be greater than or equal to 667, which, when the input is odd, is an overflow case.
 	BRP	over
-# Load (x/2) in the calculator:
+# Load (input/2) in the calculator:
 	LDA	count			// Count at this stage is still (input/2)+1
 	SUB	one			// This brings the calculator value to (input/2)
 # Check for base case:
